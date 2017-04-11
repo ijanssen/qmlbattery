@@ -2,7 +2,13 @@ QT += qml quick
 
 CONFIG += c++11
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    batteryinfo.cpp
+
+
+HEADERS += \
+    batteryinfo.h
+
 
 RESOURCES += qml.qrc
 
