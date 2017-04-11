@@ -1,0 +1,2 @@
+# qmlbattery
+QML battery indicator
