@@ -1,13 +1,15 @@
-QT += qml quick
+QT += qml quick dbus
 
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    batteryinfo.cpp
+    batteryinfo.cpp \
+    battery_linux.cpp
 
 
 HEADERS += \
-    batteryinfo.h
+    batteryinfo.h \
+    battery_linux.h
 
 
 RESOURCES += qml.qrc

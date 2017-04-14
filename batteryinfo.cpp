@@ -1,9 +1,11 @@
 #include "batteryinfo.h"
 
+#include "battery_linux.h"
+
 BatteryInfo::BatteryInfo(QObject *parent)
     : QObject(parent)
 {
-
+    Battery *b = new Battery(parent);
 }
 
 BatteryInfo::Status BatteryInfo::status() const
