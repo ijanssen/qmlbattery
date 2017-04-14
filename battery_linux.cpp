@@ -87,25 +87,37 @@ void UPowerDeviceInterface::updateProperties()
     if (m_propInterface && m_propInterface->isValid()) {
         QDBusReply<QVariantMap> r = m_propInterface->call(QLatin1String("GetAll"), QLatin1String(UPOWER_DEVICE_INTERFACE));
         m_properties = r.value();
+        qDebug() << m_properties["Percentage"];
+        emit changed();
     }
 }
 
-Battery::Battery(QObject *parent)
-    : m_upowerIface(new UPowerInterface(parent))
+BatteryInfoLinux::BatteryInfoLinux(QObject *parent)
+    : BatteryInfoPrivate(parent)
+    , m_upowerIface(new UPowerInterface(parent))
     , m_batteryIface(nullptr)
-
 {
     if (!m_upowerIface || !m_upowerIface->isValid())
         return;
     foreach (const QDBusObjectPath &device, m_upowerIface->enumerateDevices()) {
-        qDebug() << device.path();
+        //qDebug() << device.path();
         UPowerDeviceInterface *dev = new UPowerDeviceInterface(device.path(), parent);
-        qDebug() << dev->type();
+        //qDebug() << dev->type();
         if (dev->type() == 2) {
             m_batteryIface = dev;
+            onChanged();
+            connect(m_batteryIface, &UPowerDeviceInterface::changed,
+                    this, &BatteryInfoLinux::onChanged);
             break;
         } else {
             delete dev;
         }
     }
+}
+
+void BatteryInfoLinux::onChanged()
+{
+    setPercentage(m_batteryIface->percentage());
+    setTimeToFull(m_batteryIface->timeToFull());
+    setTimeToEmpty(m_batteryIface->timeToEmpty());
 }

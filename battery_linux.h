@@ -2,6 +2,7 @@
 #define BATTERY_LINUX_H
 
 #include <QtDBus>
+#include "batteryinfoprivate.h"
 
 class UPowerInterface : public QDBusAbstractInterface
 {
@@ -39,11 +40,14 @@ private:
     QString m_path;
 };
 
-class Battery : public QObject
+class BatteryInfoLinux : public BatteryInfoPrivate
 {
     Q_OBJECT
 public:
-    explicit Battery(QObject *parent = nullptr);
+    explicit BatteryInfoLinux(QObject *parent = nullptr);
+
+protected slots:
+    void onChanged();
 
 private:
     UPowerInterface *m_upowerIface;
