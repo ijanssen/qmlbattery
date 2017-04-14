@@ -1,11 +1,15 @@
 #include "batteryinfo.h"
 
 #include "battery_linux.h"
+#include "batteryinfoprivate.h"
 
 BatteryInfo::BatteryInfo(QObject *parent)
     : QObject(parent)
+    , d_ptr(new BatteryInfoPrivate(this))
 {
-    Battery *b = new Battery(parent);
+    connect(d_ptr, &BatteryInfoPrivate::percentageChanged, this, &BatteryInfo::percentageChanged);
+    connect(d_ptr, &BatteryInfoPrivate::timeToFullChanged, this, &BatteryInfo::timeToFullChanged);
+    connect(d_ptr, &BatteryInfoPrivate::timeToEmptyChanged, this, &BatteryInfo::timeToEmptyChanged);
 }
 
 BatteryInfo::Status BatteryInfo::status() const
@@ -15,15 +19,15 @@ BatteryInfo::Status BatteryInfo::status() const
 
 double BatteryInfo::percentage() const
 {
-    return 48.0;
+    return d_ptr->percentage();
 }
 
 quint64 BatteryInfo::timeToFull() const
 {
-    return 60 * 123;
+    return d_ptr->timeToFull();
 }
 
 quint64 BatteryInfo::timeToEmpty() const
 {
-    return 60 * 43;
+    return d_ptr->timeToEmpty();
 }

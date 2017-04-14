@@ -3,6 +3,8 @@
 
 #include <QObject>
 
+class BatteryInfoPrivate;
+
 class BatteryInfo : public QObject
 {
     Q_OBJECT
@@ -32,6 +34,8 @@ signals:
     void timeToFullChanged(quint64 timeToFull);
     void timeToEmptyChanged(quint64 timeToEmpty);
 
+private:
+    BatteryInfoPrivate *d_ptr;
 };
 
 #endif // BATTERYINFO_H

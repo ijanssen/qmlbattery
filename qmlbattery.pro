@@ -4,12 +4,14 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     batteryinfo.cpp \
-    battery_linux.cpp
+    battery_linux.cpp \
+    batteryinfoprivate.cpp
 
 
 HEADERS += \
     batteryinfo.h \
-    battery_linux.h
+    battery_linux.h \
+    batteryinfoprivate.h
 
 
 RESOURCES += qml.qrc
