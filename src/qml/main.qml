@@ -9,6 +9,15 @@ ApplicationWindow {
     height: 600
     title: qsTr("Battery")
 
+    function getTime(secs) {
+        var m = Math.floor((secs + 30) / 60)
+        var h = Math.floor(m / 60)
+        m %= 60
+        if (m < 10)
+            m = '0' + m;
+        return h + ':' + m
+    }
+
     BatteryInfo {
         id: batteryInfo
     }
@@ -22,10 +31,10 @@ ApplicationWindow {
             text: qsTr("Percentage: ") + batteryInfo.percentage + qsTr("%")
         }
         Label {
-            text: qsTr("Time To Empty: ") + batteryInfo.timeToEmpty
+            text: qsTr("Time To Empty: ") + getTime(batteryInfo.timeToEmpty)
         }
         Label {
-            text: qsTr("Time To Full: ") + batteryInfo.timeToFull
+            text: qsTr("Time To Full: ") + getTime(batteryInfo.timeToFull)
         }
     }
 }
