@@ -67,6 +67,11 @@ quint16 UPowerDeviceInterface::type()
     return m_properties.value("Type", 0).toUInt();
 }
 
+quint16 UPowerDeviceInterface::state()
+{
+    return m_properties.value("State", 0).toUInt();
+}
+
 double UPowerDeviceInterface::percentage()
 {
     return m_properties.value("Percentage", 0.0).toDouble();
@@ -120,4 +125,5 @@ void BatteryInfoLinux::onChanged()
     setPercentage(m_batteryIface->percentage());
     setTimeToFull(m_batteryIface->timeToFull());
     setTimeToEmpty(m_batteryIface->timeToEmpty());
+    qDebug() << "State: " << m_batteryIface->state();
 }

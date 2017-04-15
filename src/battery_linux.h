@@ -23,6 +23,7 @@ public:
     ~UPowerDeviceInterface();
 
     quint16 type();
+    quint16 state();
     double percentage();
     qint64 timeToFull();
     quint64 timeToEmpty();
