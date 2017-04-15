@@ -27,9 +27,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += tst_batteryinfo.cpp \
-        ../batteryinfoprivate.cpp
+        ../src/batteryinfoprivate.cpp
 
 
-HEADERS += ../batteryinfoprivate.h
+HEADERS += ../src/batteryinfoprivate.h
 
 DEFINES += SRCDIR=\\\"$$PWD/\\\"

@@ -6,9 +6,14 @@
 
 BatteryInfo::BatteryInfo(QObject *parent)
     : QObject(parent)
-    //, d_ptr(new BatteryInfoPrivate(this))
-    //, d_ptr(new BatteryInfoLinux(this))
+#ifdef LINUX
+    , d_ptr(new BatteryInfoLinux(this))
+#elif EMUL
     , d_ptr(new BatteryInfoEmul(this))
+#else
+    , d_ptr(new BatteryInfoPrivate(this))
+#endif
+
 {    connect(d_ptr, &BatteryInfoPrivate::percentageChanged, this, &BatteryInfo::percentageChanged);
     connect(d_ptr, &BatteryInfoPrivate::timeToFullChanged, this, &BatteryInfo::timeToFullChanged);
     connect(d_ptr, &BatteryInfoPrivate::timeToEmptyChanged, this, &BatteryInfo::timeToEmptyChanged);

@@ -1,6 +1,6 @@
 #include <QtTest>
 
-#include "../batteryinfoprivate.h"
+#include "../src/batteryinfoprivate.h"
 
 class BatteryInfoTest : public QObject
 {
