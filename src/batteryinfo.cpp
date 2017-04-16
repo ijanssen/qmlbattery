@@ -14,14 +14,22 @@ BatteryInfo::BatteryInfo(QObject *parent)
     , d_ptr(new BatteryInfoPrivate(this))
 #endif
 
-{    connect(d_ptr, &BatteryInfoPrivate::percentageChanged, this, &BatteryInfo::percentageChanged);
+{
+    connect(d_ptr, &BatteryInfoPrivate::statusChanged, this, &BatteryInfo::statusChanged);
+    connect(d_ptr, &BatteryInfoPrivate::levelChanged, this, &BatteryInfo::levelChanged);
+    connect(d_ptr, &BatteryInfoPrivate::percentageChanged, this, &BatteryInfo::percentageChanged);
     connect(d_ptr, &BatteryInfoPrivate::timeToFullChanged, this, &BatteryInfo::timeToFullChanged);
     connect(d_ptr, &BatteryInfoPrivate::timeToEmptyChanged, this, &BatteryInfo::timeToEmptyChanged);
 }
 
 BatteryInfo::Status BatteryInfo::status() const
 {
-    return Status1;
+    return d_ptr->status();
+}
+
+BatteryInfo::Level BatteryInfo::level() const
+{
+    return d_ptr->level();
 }
 
 double BatteryInfo::percentage() const

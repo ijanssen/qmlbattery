@@ -6,6 +6,16 @@ BatteryInfoPrivate::BatteryInfoPrivate(QObject *parent)
 
 }
 
+BatteryInfo::Status BatteryInfoPrivate::status() const
+{
+    return m_status;
+}
+
+BatteryInfo::Level BatteryInfoPrivate::level() const
+{
+    return m_level;
+}
+
 double BatteryInfoPrivate::percentage() const
 {
     return m_percentage;
@@ -19,6 +29,22 @@ quint64 BatteryInfoPrivate::timeToFull() const
 quint64 BatteryInfoPrivate::timeToEmpty() const
 {
     return m_timeToEmpty;
+}
+
+void BatteryInfoPrivate::setStatus(BatteryInfo::Status status)
+{
+    if (status == m_status)
+        return;
+    m_status = status;
+    emit statusChanged(m_status);
+}
+
+void BatteryInfoPrivate::setLevel(BatteryInfo::Level level)
+{
+    if (level == m_level)
+        return;
+    m_level = level;
+    emit levelChanged(m_level);
 }
 
 void BatteryInfoPrivate::setPercentage(double percentage)
