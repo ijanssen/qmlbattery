@@ -22,6 +22,7 @@ public:
     void setTimeToFull(quint64 timeToFull);
     void setTimeToEmpty(quint64 timeToEmpty);
 
+    BatteryInfo::Level levelForPercentage(double p) const;
 
 signals:
     void statusChanged(BatteryInfo::Status status);
