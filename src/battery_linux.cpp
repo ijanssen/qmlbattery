@@ -122,8 +122,17 @@ BatteryInfoLinux::BatteryInfoLinux(QObject *parent)
 
 void BatteryInfoLinux::onChanged()
 {
+    if (m_batteryIface->state() == 1)
+        setStatus(BatteryInfo::StatusCharging);
+    else if (m_batteryIface->state() == 2)
+        setStatus(BatteryInfo::StatusDischarging);
+    else if (m_batteryIface->state() == 4)
+        setStatus(BatteryInfo::StatusFull);
+    else
+        qWarning() << "Wrong state";
     setPercentage(m_batteryIface->percentage());
     setTimeToFull(m_batteryIface->timeToFull());
     setTimeToEmpty(m_batteryIface->timeToEmpty());
+    setLevel(levelForPercentage(percentage()));
     qDebug() << "State: " << m_batteryIface->state();
 }
