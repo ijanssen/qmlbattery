@@ -28,6 +28,9 @@ ApplicationWindow {
             text: qsTr("Status: ") + batteryInfo.status
         }
         Label {
+            text: qsTr("Level: ") + batteryInfo.level
+        }
+        Label {
             text: qsTr("Percentage: ") + batteryInfo.percentage + qsTr("%")
         }
         Label {

@@ -16,6 +16,7 @@ class BatteryInfo : public QObject
     Q_PROPERTY(quint64 timeToEmpty READ timeToEmpty NOTIFY timeToEmptyChanged)
 
     Q_ENUMS(Status)
+    Q_ENUMS(Level)
 public:
     enum Status {
         StatusFull,
