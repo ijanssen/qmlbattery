@@ -6,7 +6,9 @@
 BatteryInfoEmul::BatteryInfoEmul(QObject *parent)
     : BatteryInfoPrivate(parent)
 {
+    setStatus(BatteryInfo::StatusFull);
     setPercentage(100.0);
+    setLevel(levelForPercentage(100.0));
     updateTimes();
     m_timeLine1 = new QTimeLine(30000, this);
     m_timeLine1->setCurveShape(QTimeLine::LinearCurve);
@@ -28,28 +30,33 @@ BatteryInfoEmul::~BatteryInfoEmul()
 
 void BatteryInfoEmul::startTimeLine1()
 {
+    setStatus(BatteryInfo::StatusDischarging);
     m_timeLine1->start();
 }
 
 void BatteryInfoEmul::onTimeLine1FrameChanged(int i)
 {
     setPercentage(i);
+    setLevel(levelForPercentage(i));
     updateTimes();
 }
 
 void BatteryInfoEmul::onTimeLine1Finished()
 {
+    setStatus(BatteryInfo::StatusCharging);
     QTimer::singleShot(5000, this, &BatteryInfoEmul::startTimeLine2);
 }
 
 void BatteryInfoEmul::onTimeLine2FrameChanged(int i)
 {
     setPercentage(i);
+    setLevel(levelForPercentage(i));
     updateTimes();
 }
 
 void BatteryInfoEmul::onTimeLine2Finished()
 {
+    setStatus(BatteryInfo::StatusFull);
     QTimer::singleShot(5000, this, &BatteryInfoEmul::startTimeLine1);
 }
 
