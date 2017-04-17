@@ -22,6 +22,37 @@ ApplicationWindow {
         id: batteryInfo
     }
 
+    Rectangle {
+        anchors.fill: parent
+        Rectangle {
+            id: panel
+            anchors.right: parent.right
+            width: 40
+            height: parent.height
+            color: '#3f2929'
+            Rectangle {
+                id: button
+                width: 40
+                height: 40
+                anchors.left: parent.left
+                y: 100
+                color: 'lightGray'
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: batteryPopup.visible = !batteryPopup.visible
+                }
+            }
+        }
+
+        BatteryPopup {
+            id: batteryPopup
+            anchors.right: panel.left
+            y : button.y
+            visible: false
+        }
+
+    }
+
     Column {
         anchors.centerIn: parent
         Label {
@@ -31,7 +62,7 @@ ApplicationWindow {
             text: qsTr("Level: ") + batteryInfo.level
         }
         Label {
-            text: qsTr("Percentage: ") + batteryInfo.percentage + qsTr("%")
+            text: qsTr("Percentage: ") + Math.round(batteryInfo.percentage) + qsTr("%")
         }
         Label {
             text: qsTr("Time To Empty: ") + getTime(batteryInfo.timeToEmpty)
