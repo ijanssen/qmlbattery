@@ -21,7 +21,8 @@ public:
     enum Status {
         StatusFull,
         StatusCharging,
-        StatusDischarging
+        StatusDischarging,
+        StatusMissing
     };
     enum Level {
         LevelEmpty,

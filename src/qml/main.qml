@@ -36,9 +36,10 @@ ApplicationWindow {
                 height: 40
                 anchors.left: parent.left
                 y: 100
-                color: 'lightGray'
+                color: batteryInfo.status === BatteryInfo.StatusMissing ? 'cyan' : 'lightGray'
                 MouseArea {
                     anchors.fill: parent
+                    enabled: batteryInfo.status !== BatteryInfo.StatusMissing
                     onClicked: batteryPopup.visible = !batteryPopup.visible
                 }
             }

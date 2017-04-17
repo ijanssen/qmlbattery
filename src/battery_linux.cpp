@@ -118,6 +118,9 @@ BatteryInfoLinux::BatteryInfoLinux(QObject *parent)
             delete dev;
         }
     }
+    if (!m_batteryIface) {
+        setStatus(BatteryInfo::StatusMissing);
+    }
 }
 
 void BatteryInfoLinux::onChanged()
