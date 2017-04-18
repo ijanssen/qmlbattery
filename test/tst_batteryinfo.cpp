@@ -96,13 +96,13 @@ void BatteryInfoTest::testTimeToEmpty()
 
 void BatteryInfoTest::testLevelForPercentage()
 {
-    QCOMPARE(battery.levelForPercentage(11.0), BatteryInfo::LevelCritical);
-    QCOMPARE(battery.levelForPercentage(0.0), BatteryInfo::LevelEmpty);
-    QCOMPARE(battery.levelForPercentage(100.0), BatteryInfo::LevelFull);
-    QCOMPARE(battery.levelForPercentage(31.0), BatteryInfo::LevelLow);
-    QCOMPARE(battery.levelForPercentage(55.5), BatteryInfo::LevelMedium);
-    QCOMPARE(battery.levelForPercentage(99.9), BatteryInfo::LevelHigh);
-    QCOMPARE(battery.levelForPercentage(90.0), BatteryInfo::LevelHigh);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(11.0), BatteryInfo::LevelCritical);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(0.0), BatteryInfo::LevelEmpty);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(100.0), BatteryInfo::LevelFull);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(31.0), BatteryInfo::LevelLow);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(55.5), BatteryInfo::LevelMedium);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(99.9), BatteryInfo::LevelHigh);
+    QCOMPARE(BatteryInfoPrivate::levelForPercentage(90.0), BatteryInfo::LevelHigh);
 }
 
 QTEST_APPLESS_MAIN(BatteryInfoTest)

@@ -71,7 +71,7 @@ void BatteryInfoPrivate::setTimeToEmpty(quint64 timeToEmpty)
     emit timeToEmptyChanged(m_timeToEmpty);
 }
 
-BatteryInfo::Level BatteryInfoPrivate::levelForPercentage(double p) const
+BatteryInfo::Level BatteryInfoPrivate::levelForPercentage(double p)
 {
     if (p == 0.0)
         return BatteryInfo::LevelEmpty;
