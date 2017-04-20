@@ -3,8 +3,9 @@ import org.test.batteryinfo 1.0
 
 Rectangle {
     color: '#4f2f31'
-    width: 300
+    width: 290
     height: 40
+    z: 100
 
     function getTime(secs) {
         var m = Math.floor((secs + 30) / 60)
@@ -24,6 +25,14 @@ Rectangle {
             return qsTr('CHARGING: ') + getTime(batteryInfo.timeToFull) + ' ' + qsTr('LEFT')
         return ''
     }
+    Rectangle {
+        color: '#4f2f31'
+        width: 20
+        height: 40
+        radius: 10
+        anchors.horizontalCenter: parent.left
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
     Text {
         anchors {
@@ -39,12 +48,16 @@ Rectangle {
     Text {
         anchors {
             left: parent.left
-            leftMargin: 20
+            leftMargin: 10
             verticalCenter: parent.verticalCenter
         }
         font.pixelSize: 16
         font.bold: true
         color: '#948283'
         text: getStatusText()
+    }
+
+    MouseArea {
+        anchors.fill: parent
     }
 }

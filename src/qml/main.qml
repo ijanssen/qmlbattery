@@ -28,20 +28,21 @@ ApplicationWindow {
             id: panel
             anchors.right: parent.right
             width: 40
+            z: 100
             height: parent.height
             color: '#3f2929'
-            Rectangle {
+            BatteryIndicator {
                 id: button
                 width: 40
                 height: 40
                 anchors.left: parent.left
                 y: 100
-                color: batteryInfo.status === BatteryInfo.StatusMissing ? 'cyan' : 'lightGray'
-                MouseArea {
-                    anchors.fill: parent
-                    enabled: batteryInfo.status !== BatteryInfo.StatusMissing
-                    onClicked: batteryPopup.visible = !batteryPopup.visible
-                }
+                enabled: batteryInfo.status !== BatteryInfo.StatusMissing
+                img: batteryInfo.status === BatteryInfo.StatusFull ? 'battery-100' : (
+                     batteryInfo.status === BatteryInfo.StatusMissing ? 'battery-missing' : (
+                     batteryInfo.status === BatteryInfo.StatusDischarging ?
+                                   icons[batteryInfo.level] : cicons[batteryInfo.level]))
+                onClicked: batteryPopup.visible = !batteryPopup.visible
             }
         }
 
@@ -52,9 +53,14 @@ ApplicationWindow {
             visible: false
         }
 
+        MouseArea {
+            anchors.fill: parent
+            onClicked: batteryPopup.visible = false
+        }
+
     }
 
-    Column {
+    /*Column {
         anchors.centerIn: parent
         Label {
             text: qsTr("Status: ") + batteryInfo.status
@@ -71,5 +77,21 @@ ApplicationWindow {
         Label {
             text: qsTr("Time To Full: ") + getTime(batteryInfo.timeToFull)
         }
+    }*/
+
+    property variant icons: []
+    property variant cicons: []
+
+    Component.onCompleted: {
+        icons[BatteryInfo.LevelCritical] = 'battery-caution'
+        icons[BatteryInfo.LevelLow] = 'battery-040'
+        icons[BatteryInfo.LevelMedium] = 'battery-060'
+        icons[BatteryInfo.LevelHigh] = 'battery-080'
+        icons[BatteryInfo.LevelFull] = 'battery-080'
+        cicons[BatteryInfo.LevelCritical] = 'battery-charging-caution'
+        cicons[BatteryInfo.LevelLow] = 'battery-charging-040'
+        cicons[BatteryInfo.LevelMedium] = 'battery-charging-060'
+        cicons[BatteryInfo.LevelHigh] = 'battery-charging-080'
+        cicons[BatteryInfo.LevelFull] = 'battery-charging-080'
     }
 }

@@ -3,5 +3,17 @@
         <file>qml/main.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>qml/BatteryPopup.qml</file>
+        <file>images/battery-040.png</file>
+        <file>images/battery-060.png</file>
+        <file>images/battery-080.png</file>
+        <file>images/battery-100.png</file>
+        <file>images/battery-caution.png</file>
+        <file>images/battery-charging-040.png</file>
+        <file>images/battery-charging-060.png</file>
+        <file>images/battery-charging-080.png</file>
+        <file>images/battery-charging-caution.png</file>
+        <file>images/battery-low.png</file>
+        <file>images/battery-missing.png</file>
+        <file>qml/BatteryIndicator.qml</file>
     </qresource>
 </RCC>
